@@ -1,24 +1,7 @@
-use std::env;
+extern crate aoc_runner;
+extern crate aoc_runner_derive;
+extern crate flatypus_aoc_rust;
 
-mod solutions{
-    pub mod day1;
-}
+use aoc_runner_derive::aoc_main;
 
-use crate::solutions::day1::day1;
-
-
-fn main() {
-    let args: Vec<String> = env::args().collect();
-    if args.len() > 1{
-        if args[1] == "1"{
-            println!("Day {}", args[1]);
-            day1()
-        } else{
-            println!("Day 1");
-            day1()
-        }
-    } else{
-        println!("Day 1");
-        day1()
-    }
-}
+aoc_main! { lib = flatypus_aoc_rust }
