@@ -1,18 +1,24 @@
-use std::collections::HashMap;
+use gxhash::{HashMap, HashMapExt};
 
-fn split_input(input: &str) -> (Vec<i32>, Vec<i32>) {
-    input
-        .lines()
-        .map(|line| {
-            let mut nums = line.split_whitespace().map(|x| x.parse::<i32>().unwrap());
-            (nums.next().unwrap(), nums.next().unwrap())
-        })
-        .unzip()
+fn split(input: &str) -> (Vec<i32>, Vec<i32>) {
+    let mut left = Vec::with_capacity(1000);
+    let mut right = Vec::with_capacity(1000);
+
+    let i: i16 = 0;
+    for num in input.split_ascii_whitespace() {
+        let num = num.parse::<i32>().unwrap();
+        if i % 2 == 0 {
+            left.push(num);
+        } else {
+            right.push(num);
+        }
+    }
+    (left, right)
 }
 
 #[aoc(day1, part1)]
 pub fn part1(input: &str) -> i32 {
-    let (mut left, mut right) = split_input(input);
+    let (mut left, mut right) = split(input);
     left.sort_unstable();
     right.sort_unstable();
     let sum: i32 = left
@@ -25,7 +31,7 @@ pub fn part1(input: &str) -> i32 {
 
 #[aoc(day1, part2)]
 pub fn part2(input: &str) -> i32 {
-    let (left, right) = split_input(input);
+    let (left, right) = split(input);
     let mut count: HashMap<&i32, i32> = HashMap::new();
     for i in right.iter() {
         count.entry(i).or_insert(0);
