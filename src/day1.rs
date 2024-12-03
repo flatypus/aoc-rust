@@ -1,4 +1,4 @@
-use gxhash::{HashMap, HashMapExt};
+use std::collections::HashMap;
 
 fn split(input: &str) -> (Vec<i32>, Vec<i32>) {
     let mut left = Vec::with_capacity(1000);
